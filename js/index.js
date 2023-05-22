@@ -10,6 +10,9 @@ window.onload = function() {
     const loading = document.querySelector(".loading");
     setTimeout(function() {
         loading.classList.add("loaded");
+        setTimeout(function() {
+            loading.style.display = "none";
+        }, 500);
     }, 1000);
 }
 
