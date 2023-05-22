@@ -4,12 +4,15 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <link rel="stylesheet" href="css/index.css">
-  <script async src="js/index.js"></script>
   <title>Kurukuru! by AozoraDev</title>
   
   <!-- It's called preloading lol -->
   <script type="text/javascript" charset="utf-8">
-      new Image().src = "img/herta-kurukuru.gif";
+      let herta = new Image();
+      herta.src = "img/herta-kurukuru.gif";
+      
+      let sfx = new Audio("audio/kurukuru.m4a")
+      sfx.preload = "auto";
   </script>
 </head>
 <body>
@@ -22,5 +25,7 @@
     <div class="container">
         <!--img src="img/herta-kurukuru.gif" alt="Herta Kurukuru" width="240px" / -->
     </div>
+    
+    <script src="js/index.js"></script>
 </body>
 </html>

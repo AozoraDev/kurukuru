@@ -23,11 +23,13 @@ body {
     top: 0;
     left: 0;
     opacity: 1;
-    transition: opacity 0.5s;
+    visibility: visible;
+    transition: 0.5s;
 }
 
 .loading.loaded {
-    opacity: 0;
+    opacity: 0 !important;
+    visibility: hidden !important;
 }
 
 .loading img {

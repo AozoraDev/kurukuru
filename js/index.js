@@ -1,6 +1,3 @@
-let sfx = new Audio("audio/kurukuru.m4a")
-sfx.preload = "auto";
-
 let img = document.createElement("img");
 img.src = "img/herta-kurukuru.gif";
 img.alt = "Herta Kurukuru";
@@ -10,9 +7,6 @@ window.onload = function() {
     const loading = document.querySelector(".loading");
     setTimeout(function() {
         loading.classList.add("loaded");
-        setTimeout(function() {
-            loading.style.display = "none";
-        }, 500);
     }, 1000);
 }
 
