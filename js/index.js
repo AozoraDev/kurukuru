@@ -11,12 +11,14 @@ window.onload = function() {
 }
 
 const container = document.querySelector(".container");
+let sfxPos = 0;
 container.addEventListener("click", function() {
-    let clonedSfx = sfx.cloneNode();
+    let clonedSfx = sfx[sfxPos].cloneNode();
     let clonedImg = img.cloneNode();
     
     container.appendChild(clonedImg);
     clonedSfx.play();
+    sfxPos = (sfxPos == 0) ? 1 : 0;
     
     setTimeout(function() {
         container.removeChild(clonedImg);

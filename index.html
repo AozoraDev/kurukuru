@@ -11,8 +11,14 @@
       let herta = new Image();
       herta.src = "img/herta-kurukuru.gif";
       
-      let sfx = new Audio("audio/kurukuru.m4a")
-      sfx.preload = "auto";
+      let sfx = [
+          new Audio("audio/kurukuru.m4a"),
+          new Audio("audio/kururing.m4a")
+      ]
+      
+      for (let audio of sfx) {
+          audio.preload = "auto";
+      }
   </script>
 </head>
 <body>
