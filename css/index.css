@@ -22,6 +22,7 @@ body {
     align-items: center;
     justify-content: center;
     flex-direction: column;
+    text-align: center;
     z-index: 100;
     top: 0;
     left: 0;
@@ -63,6 +64,17 @@ body {
     bottom: 0;
     right: 100%;
     animation: sliding 0.8s linear infinite;
+}
+
+.container .data {
+    color: #fff;
+    position: absolute;
+    text-align: center;
+    top: 30px;
+}
+
+.container .data h1 {
+    margin-bottom: 0;
 }
 
 @keyframes sliding {
