@@ -81,7 +81,7 @@ setInterval(function() {
     const counts = tempCounts;
     tempCounts = 0;
     
-    fetch("http://localhost:8080/kurukuru/update", {
+    fetch("https://api-aozora.alwaysdata.net/kurukuru/update", {
         method: "post",
         headers: {
             "Content-Type": "application/json"
