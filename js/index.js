@@ -22,7 +22,7 @@ window.onload = function() {
     let message = loading.querySelector("span");
     let header = loading.querySelector("h2");
     
-    fetch("http://localhost:8080/kurukuru")
+    fetch("https://api.aozora.my.id/kurukuru")
     .then(res => res.json())
     .then(res => {
         if (res.error) {
