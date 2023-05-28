@@ -3,8 +3,12 @@ img.src = "img/herta-kurukuru.gif";
 img.alt = "Herta Kurukuru";
 img.width = 240;
 
+const worker = new Worker("js/worker.js");
 const container = document.querySelector(".container");
 const data = document.querySelector(".data");
+const loading = document.querySelector(".loading");
+let message = loading.querySelector("span");
+let header = loading.querySelector("h2");
 let total = data.querySelector("h1");
 
 let totalCounts;
@@ -17,31 +21,42 @@ function startTimeout() {
     }, 10000);
 }
 
-window.onload = function() {
-    const loading = document.querySelector(".loading");
-    let message = loading.querySelector("span");
-    let header = loading.querySelector("h2");
+worker.onerror = function (e) {
+    console.error(e.message);
     
-    fetch("https://api-aozora.alwaysdata.net/kurukuru")
-    .then(res => res.json())
-    .then(res => {
-        if (res.error) {
-            header.innerText = "Oops!";
-            message.style.display = "block";
-            
-            return;
-        }
-        
-        totalCounts = res.counts;
+    return;
+}
+
+worker.onmessage = function (e) {
+    // Error if API is dead
+    if (e.data == "onloadError") {
+        header.innerText = "Oops!";
+        message.style.display = "block";
+    }
+    
+    // Add total counts and hide the loading
+    else if (typeof e.data == "number") {
+        totalCounts = e.data;
         total.innerText = totalCounts;
+        
         setTimeout(function() {
             loading.classList.add("loaded");
         }, 1000);
-    })
-    .catch(err => {
-        header.innerText = "Oops!";
-        message.style.display = "block";
-    })
+    }
+    
+    // Error during post user counts to database
+    else if (e.data == "updateError") {
+        console.error("Your current counts is not saved to the database due to error connecting to API");
+    }
+    
+    // Error when unauthorized
+    else if (e.data == "updateUnauthorized") {
+        console.error("Your current counts is not saved to the database due to unauthorized request to API");
+    }
+}
+
+window.onload = function() {
+    worker.postMessage("onload");
 }
 
 let sfxPos = 0;
@@ -81,22 +96,5 @@ setInterval(function() {
     const counts = tempCounts;
     tempCounts = 0;
     
-    fetch("https://api-aozora.alwaysdata.net/kurukuru/update", {
-        method: "post",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-            counts: counts,
-            isTrusted: isTrusted
-        })
-    })
-    .then(res => res.json())
-    .then(res => {
-        if (res.error) {
-            console.error(`${counts} counts is not saved due unauthorized access to the database!`);
-            return;
-        }
-    })
-    .catch(err => console.error(`${counts} counts is not saved due to error on the database!`));
+    worker.postMessage({ counts: counts, isTrusted: isTrusted });
 }, 5000);
