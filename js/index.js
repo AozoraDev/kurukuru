@@ -3,6 +3,7 @@ img.src = "img/herta-kurukuru.gif";
 img.alt = "Herta Kurukuru";
 img.width = 240;
 
+const formatter = new Intl.NumberFormat();
 const worker = new Worker("js/worker.js");
 const container = document.querySelector(".container");
 const data = document.querySelector(".data");
@@ -37,7 +38,7 @@ worker.onmessage = function (e) {
     // Add total counts and hide the loading
     else if (typeof e.data == "number") {
         totalCounts = e.data;
-        total.innerText = totalCounts;
+        total.innerText = formatter.format(totalCounts);
         
         setTimeout(function() {
             loading.classList.add("loaded");
@@ -74,8 +75,8 @@ container.addEventListener("click", function(e) {
     container.appendChild(clonedImg);
     clonedSfx.play();
     tempCounts++;
-    user.innerText = userCounts++;
-    total.innerText = totalCounts++;
+    user.innerText = formatter.format(userCounts++);
+    total.innerText = formatter.format(totalCounts++);
     sfxPos = (sfxPos == 0) ? 1: 0;
     
     clonedSfx.addEventListener('ended', function() {
