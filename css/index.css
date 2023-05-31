@@ -11,6 +11,11 @@ body {
     background: #A16CFF;
 }
 
+a  {
+    color: #A16CFF;
+    text-decoration: none;
+}
+
 .loading {
     height: 100%;
     width: 100%;
@@ -40,16 +45,6 @@ body {
     animation: rotating 2s linear infinite;
 }
 
-.loading small {
-    position: absolute;
-    bottom: 10px;
-    opacity: 0.5;
-}
-
-.loading small a {
-    color: #A16CFF;
-}
-
 .container {
     position: relative;
     display: flex;
@@ -57,6 +52,75 @@ body {
     justify-content: center;
     width: 100%;
     height: 100%;
+}
+
+.popup-background {
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 50;
+    background: rgba(0, 0, 0, 0.7);
+    opacity: 0;
+    visibility: hidden;
+    transition: 0.2s;
+}
+
+.popup-background.open {
+    visibility: visible !important;
+    opacity: 1 !important;
+}
+
+.popup {
+    position: relative;
+    color: #000;
+    width: 300px;
+    height: auto;
+    max-height: 90%;
+    background: #fff;
+    padding: 5px 15px;
+    border-radius: 10px;
+    text-align: center;
+    overflow: auto;
+}
+
+.popup .body {
+    text-align: left;
+}
+
+.popup .close {
+    position: absolute;
+    cursor: pointer;
+    font-size: 30px;
+    opacity: 0.5;
+    right: 0;
+    top: 0;
+}
+
+.popup .body .credits {
+    display: flex;
+    align-items: center;
+    margin: 5px 0;
+}
+
+.popup .body img {
+    border: 1px solid #000;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.info {
+    color: #fff;
+    font-size: 35px;
+    position: absolute;
+    right: 5px;
+    top: 5px;
+    cursor: pointer;
+    z-index: 10;
 }
 
 .container img {
@@ -74,7 +138,7 @@ body {
     top: 30px;
 }
 
-.container .data h1 {
+.container .data h1, .popup h2 {
     margin-bottom: 0;
 }
 

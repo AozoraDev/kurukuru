@@ -8,6 +8,8 @@ const worker = new Worker("js/worker.js");
 const container = document.querySelector(".container");
 const data = document.querySelector(".data");
 const loading = document.querySelector(".loading");
+const popup = document.querySelector(".popup-background");
+
 let message = loading.querySelector("span");
 let header = loading.querySelector("h2");
 let total = data.querySelector("h1");
@@ -58,6 +60,15 @@ worker.onmessage = function (e) {
 
 window.onload = function() {
     worker.postMessage("onload");
+}
+
+const openPopup = document.getElementById("openPopup");
+const closePopup = document.getElementById("closePopup");
+openPopup.onclick = function() {
+    popup.classList.add("open");
+}
+closePopup.onclick = function() {
+    popup.classList.remove("open");
 }
 
 let sfxPos = 0;
