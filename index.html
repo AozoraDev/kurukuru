@@ -9,8 +9,13 @@
   
   <!-- It's called preloading lol -->
   <script type="text/javascript" charset="utf-8">
-      let herta = new Image();
-      herta.src = "img/herta-kurukuru.gif";
+      new Image().src = "img/herta-kurukuru.gif";
+      new Image().src = "monika/g1.webp";
+      new Image().src = "monika/g2.webp";
+      
+      let gm = new Audio("monika/gm.ogg");
+      gm.preload = "auto";
+      gm.loop = true;
       
       let sfx = [
           new Audio("audio/kurukuru.m4a"),
@@ -64,6 +69,7 @@
         <!--img src="img/herta-kurukuru.gif" alt="Herta Kurukuru" width="240px" / -->
     </div>
     
+    <script id="monika" src="js/monika.js"></script>
     <script src="js/index.js"></script>
 </body>
 </html>

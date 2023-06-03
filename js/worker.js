@@ -1,6 +1,6 @@
 onmessage = function (e) {
     if (e.data == "onload") {
-        fetch("https://api-aozora.alwaysdata.net/kurukuru")
+        fetch("https://api.aozora.my.id/kurukuru")
         .then(res => res.json())
         .then(res => {
             if (res.error) {
@@ -14,7 +14,7 @@ onmessage = function (e) {
     }
     
     else if (e.data.counts && e.data.isTrusted) {
-        fetch("https://api-aozora.alwaysdata.net/kurukuru/update", {
+        fetch("https://api.aozora.my.id/kurukuru/update", {
             method: "post",
             headers: {
                 "Content-Type": "application/json"
@@ -27,6 +27,10 @@ onmessage = function (e) {
         .then(res => res.json())
         .then(res => {
             if (res.error) {
+                if (res.autoclick) {
+                    postMessage("monika");
+                    return;
+                }
                 postMessage("updateUnauthorized");
             }
         })

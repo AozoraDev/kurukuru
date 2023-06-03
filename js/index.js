@@ -56,9 +56,22 @@ worker.onmessage = function (e) {
     else if (e.data == "updateUnauthorized") {
         console.error("Your current counts is not saved to the database due to unauthorized request to API");
     }
+    
+    // ...
+    else if (e.data == "monika") {
+        executeMonika();
+    }
 }
 
 window.onload = function() {
+    if (localStorage.getItem("blocked") == "true") {
+        header.innerText = "Oops!";
+        message.innerText = "You are blocked from using this service.";
+        message.style.display = "block";
+        
+        return;
+    }
+    
     worker.postMessage("onload");
 }
 
@@ -93,9 +106,6 @@ container.addEventListener("click", function(e) {
     clonedSfx.addEventListener('ended', function() {
         // Release the audio resources
         clonedSfx.pause();
-        clonedSfx.currentTime = 0;
-        clonedSfx.src = '';
-        clonedSfx.load();
     });
     setTimeout(function() {
         container.removeChild(clonedImg);
