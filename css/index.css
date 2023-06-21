@@ -45,16 +45,22 @@ a  {
     animation: rotating 2s linear infinite;
 }
 
-.container {
-    position: relative;
+.warning {
     display: flex;
     align-items: center;
-    justify-content: center;
-    width: 100%;
-    height: 100%;
+    background: rgba(255, 204, 0, 0.5);
+    margin-top: 25px;
+    border-radius: 10px;
+    padding: 15px;
 }
 
-.popup-background {
+.warning i {
+    color: #FFCC00;
+    margin-right: 15px;
+    font-size: 25px;
+}
+
+.popup-overlay {
     position: fixed;
     display: flex;
     justify-content: center;
@@ -70,7 +76,7 @@ a  {
     transition: 0.2s;
 }
 
-.popup-background.open {
+.popup-overlay.open {
     visibility: visible !important;
     opacity: 1 !important;
 }
@@ -88,10 +94,6 @@ a  {
     overflow: auto;
 }
 
-.popup .body {
-    text-align: left;
-}
-
 .popup .close {
     position: absolute;
     cursor: pointer;
@@ -101,30 +103,68 @@ a  {
     top: 0;
 }
 
-.popup .body .credits {
-    display: flex;
-    align-items: center;
-    margin: 5px 0;
+.popup.settings {
+    text-align: left !important;
+    padding-bottom: 15px;
 }
 
-.popup .body img {
+.settings label {
+    display: flex;
+    align-items: center;
+}
+
+.popup .credits {
+    text-align: left;
+}
+
+.popup .credits img {
     border: 1px solid #000;
     border-radius: 50%;
     margin-right: 10px;
 }
 
-.info {
+.popup .credits .credit {
+    display: flex;
+    align-items: center;
+    margin: 5px 0;
+}
+
+.popup .credits .credit span {
+    display: flex;
+    flex-direction: column;
+}
+
+.popup .credits .credit small {
+    opacity: 0.5;
+}
+
+.buttons {
     color: #fff;
     font-size: 35px;
     position: absolute;
+    display: flex;
+    flex-direction: column;
     right: 5px;
     top: 5px;
-    cursor: pointer;
     z-index: 10;
 }
 
+.buttons i {
+    margin: 3px 0;
+    cursor: pointer;
+}
+
+.container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+}
+
 .container img {
-    position: absolute;
+    position: fixed;
     bottom: 0;
     right: 100%;
     animation: sliding 0.8s linear infinite;

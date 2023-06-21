@@ -5,24 +5,24 @@ img.width = 240;
 
 const formatter = new Intl.NumberFormat();
 const worker = new Worker("js/worker.js");
+
 const container = document.querySelector(".container");
 const data = document.querySelector(".data");
 const loading = document.querySelector(".loading");
-const popup = document.querySelector(".popup-background");
-
-let message = loading.querySelector("span");
-let header = loading.querySelector("h2");
-let total = data.querySelector("h1");
 
 let totalCounts;
 let isTrusted;
 let timeout;
 
-function startTimeout() {
-    timeout = setTimeout(function() {
-        isTrusted = false;
-    }, 10000);
-}
+// Apply settings
+settings.forEach(function (setting, index) {
+    for (const key in setting) {
+        const id = `#settings${index}[name="${key}"]`;
+        let ele = document.querySelector(id);
+        
+        ele.checked = setting[key];
+    }
+});
 
 worker.onerror = function (e) {
     console.error(e.message);
@@ -30,6 +30,9 @@ worker.onerror = function (e) {
     return;
 }
 
+let message = loading.querySelector("span");
+let header = loading.querySelector("h2");
+let total = data.querySelector("h1");
 worker.onmessage = function (e) {
     // Error if API is dead
     if (e.data == "onloadError") {
@@ -75,35 +78,50 @@ window.onload = function() {
     worker.postMessage("onload");
 }
 
-const openPopup = document.getElementById("openPopup");
-const closePopup = document.getElementById("closePopup");
-openPopup.onclick = function() {
-    popup.classList.add("open");
+function startTimeout() {
+    timeout = setTimeout(function() {
+        isTrusted = false;
+    }, 10000);
 }
-closePopup.onclick = function() {
-    popup.classList.remove("open");
+
+function openPopup(id) {
+    const element = document.querySelector("#" + id);
+    element.classList.add("open");
+}
+
+function closePopup(id) {
+    const element = document.querySelector("#" + id);
+    element.classList.remove("open");
+}
+
+function updateSettings(ele) {
+    const index = Number(ele.id.slice(8));
+    settings[index][ele.name] = ele.checked;
+    
+    localStorage.setItem("settings", JSON.stringify(settings));
 }
 
 let sfxPos = 0;
 let tempCounts = 0;
 let userCounts = 0
 let user = data.querySelector("span");
+const s0Final = settings[0].kurukuru || settings[0].kururin;
 container.addEventListener("click", function(e) {
     if (timeout) clearTimeout(timeout);
     startTimeout();
     
     isTrusted = e.isTrusted;
-    let clonedSfx = sfx[sfxPos].cloneNode();
+    let clonedSfx = (s0Final) ? sfx[sfxPos].cloneNode() : null;
     let clonedImg = img.cloneNode();
 
     container.appendChild(clonedImg);
-    clonedSfx.play();
+    if (s0Final) clonedSfx.play();
     tempCounts++;
     user.innerText = formatter.format(userCounts++);
     total.innerText = formatter.format(totalCounts++);
-    sfxPos = (sfxPos == 0) ? 1: 0;
+    if (sfx.length >= 2) sfxPos = (settings[0].randomize) ? Math.floor(Math.random() * sfx.length) : (sfxPos == 0) ? 1 : 0;
     
-    clonedSfx.addEventListener('ended', function() {
+    if (s0Final) clonedSfx.addEventListener('ended', function() {
         // Release the audio resources
         clonedSfx.pause();
     });
