@@ -14,6 +14,9 @@
               kurukuru: true,
               kururin: true,
               randomize: false
+          },
+          {
+              usewebsocket: false
           }
       ];
       
@@ -29,12 +32,6 @@
   <!-- It's called preloading lol -->
   <script type="text/javascript" charset="utf-8">
       new Image().src = "img/herta-kurukuru.gif";
-      new Image().src = "monika/g1.webp";
-      new Image().src = "monika/g2.webp";
-      
-      let gm = new Audio("monika/gm.ogg");
-      gm.preload = "auto";
-      gm.loop = true;
       
       let sfx = [];
       if (settings[0].kurukuru) sfx.push(new Audio("audio/kurukuru.mp3"));
@@ -49,9 +46,8 @@
     <div class="loading">
         <img src="img/herta_teri.webp" alt="Herta Teri" width="80px" />
         <h2>Loading...</h2>
-        <span style="display: none;">
-            It seems that an error occurred while retrieving data from the database.<br />
-            Please try again later.
+        <span>
+            Starting...
         </span>
     </div>
     
@@ -83,6 +79,13 @@
                         <small>Teri-style Herta image</small>
                     </span>
                 </div>
+                <div class="credit">
+                    <img src="img/ChatGPT.svg" alt="ChatGPT" width="40px" />
+                    <span>
+                        <a href="https://chat.openai.com">@ChatGPT</a>
+                        <small>Code contributor, of course lol</small>
+                    </span>
+                </div>
             </div>
         </div>
     </div>
@@ -94,7 +97,7 @@
                 <i class="bx bxs-error"></i>
                 <span><small>(NR) means that the setting will be applied after refreshing the website</small></span>
             </div>
-            <h3>Sounds</h3>
+            <h3>Sound</h3>
             <label>
                 <input type="checkbox" name="kurukuru" id="settings0" onchange="updateSettings(this);"/>
                 <span>Kurukuru (NR)</span>
@@ -108,10 +111,33 @@
                 <input type="checkbox" name="randomize" id="settings0" onchange="updateSettings(this);"/>
                 <span>Randomize</span>
             </label>
+            <h3>Advanced</h3>
+            <label>
+                <input type="checkbox" name="usewebsocket" id="settings1" onchange="updateSettings(this);"/>
+                <span>
+                    Use WebSocket (Beta) (NR)
+                    <br />
+                    <small>Using WebSocket will unlock more features such as the number of online players and multiplayer. If you encounter any issues while using WebSocket, please disable it.</small>
+                </span>
+            </label>
         </div>
     </div>
     
     <div class="container">
+        <div class="websocket">
+            <span id="ping">
+                <i class="bx bx-wifi-off" style="color: #FFF;"></i>
+                <small>0ms</small>
+            </span>
+            <span id="online">
+                <i class="bx bx-group"></i>
+                <small>0</small>
+            </span>
+        </div>
+        <div class="notification">
+            <i class="bx bxs-error"></i>
+            <span>...</span>
+        </div>
         <div class="data">
             <h3>Herta have been spinning</h3>
             <h1>0</h1>
@@ -121,7 +147,6 @@
         <!--img src="img/herta-kurukuru.gif" alt="Herta Kurukuru" width="240px" / -->
     </div>
     
-    <script id="monika" src="js/monika.js"></script>
     <script src="js/index.js"></script>
 </body>
 </html>

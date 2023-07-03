@@ -17,20 +17,21 @@ a  {
 }
 
 .loading {
+    position: fixed;
     height: 100%;
     width: 100%;
+    top: 0;
+    left: 0;
     background: #000;
     color: #fff;
-    overflow: hidden;
-    position: fixed;
+    box-sizing: border-box;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
+    padding: 20px;
     text-align: center;
     z-index: 100;
-    top: 0;
-    left: 0;
     opacity: 1;
     visibility: visible;
     transition: 0.5s;
@@ -45,6 +46,31 @@ a  {
     animation: rotating 2s linear infinite;
 }
 
+.notification {
+    color: #000;
+    position: absolute;
+    display: flex;
+    bottom: 5px;
+    width: 250px;
+    min-height: 30px;
+    align-items: center;
+    border-radius: 10px;
+    background: #fff;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+    opacity: 0;
+    visibility: hidden;
+    padding: 10px;
+    z-index: 45;
+    transform: translateY(40px);
+    transition: 0.5s;
+}
+
+.notification.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0px);
+}
+
 .warning {
     display: flex;
     align-items: center;
@@ -54,7 +80,7 @@ a  {
     padding: 15px;
 }
 
-.warning i {
+.warning i, .notification i {
     color: #FFCC00;
     margin-right: 15px;
     font-size: 25px;
@@ -110,7 +136,15 @@ a  {
 
 .settings label {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
+}
+
+.settings label span {
+    margin-top: 1px;
+}
+
+.settings label small {
+    opacity: 0.6;
 }
 
 .popup .credits {
@@ -138,6 +172,7 @@ a  {
     opacity: 0.5;
 }
 
+
 .buttons {
     color: #fff;
     font-size: 35px;
@@ -152,6 +187,29 @@ a  {
 .buttons i {
     margin: 3px 0;
     cursor: pointer;
+}
+
+.websocket {
+    position: absolute;
+    display: flex;
+    color: #fff;
+    top: 5px;
+    z-index: 10;
+}
+
+.websocket i {
+    font-size: 20px;
+    margin-right: 3px;
+}
+
+.websocket span {
+    display: flex;
+    align-items: center;
+    margin: 0 7px;
+}
+
+.websocket small {
+    font-size: 10px;
 }
 
 .container {
