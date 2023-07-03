@@ -37,7 +37,7 @@ const ping = websocket.querySelector("#ping small");
 const pingIcon = document.querySelector("#ping i");
 const totalPlayers = document.querySelector("#online small");
 
-const usewebsocket = settings[1].usewebsocket;
+const usewebsocket = (settings[1] && settings[1].usewebsocket) ? settings[1].usewebsocket : false;
 worker.onmessage = function (e) {
     switch (e.data.code) {
         // -100: Error when no bitches, i mean... when failed to connecting to WebSocket or API
