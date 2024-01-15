@@ -1,8 +1,7 @@
 # Kurukuru!
-![Herta spinning](https://raw.githubusercontent.com/AozoraDev/kurukuru/main/img/herta-kurukuru.gif)
+<img src="https://raw.githubusercontent.com/AozoraDev/kurukuru/main/img/herta-kurukuru.gif" align="right" width="100" height="100">
+A website for HSR players spends time clicking and watching Herta twirling.
 
-Like... look at this fricking Herta spinning while saying **kurukuru** and **kururing**.
-I-I-I can't take it anymore. Pls get it out of my head.
 # Thanks to
-- [Seseren_kr](https://twitter.com/Seseren_kr) for spinning Herta gif
-- [AdiMIV_art](https://twitter.com/AdimivA) for Teri Herta pic
+- [Seseren_kr](https://twitter.com/Seseren_kr) for twirling Herta gif
+- [AdiMIV_art](https://twitter.com/AdimivA) for teri Herta image
